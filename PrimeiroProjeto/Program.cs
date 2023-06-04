@@ -1,13 +1,15 @@
-﻿string boaVindas = "Boas vindas";
-
-void ExibirMensagemBoasVindas()
+﻿string boaVindas = "\nBoas vindas ao Screen Soud";
+//List<string> ListaDasBandas = new List<string>();// Lista de bandas () no final indica que vc vai buscar bandas cadastrdas {} vai definis as bandas
+List<string> ListaDasBandas = new List<string> { "U2", "THE BEATS", "CALIPSO"};
+void ExibirLogo()
 {
-    Console.WriteLine("🆂🅲🆁🅴🅴🅽 🆂🅾🆄🅽🅳\n");
+    Console.WriteLine("\r\n░██████╗░█████╗░██████╗░███████╗███████╗███╗░░██╗  ░██████╗░█████╗░██╗░░░██╗██████╗░\r\n██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝████╗░██║  ██╔════╝██╔══██╗██║░░░██║██╔══██╗\r\n╚█████╗░██║░░╚═╝██████╔╝█████╗░░█████╗░░██╔██╗██║  ╚█████╗░██║░░██║██║░░░██║██║░░██║\r\n░╚═══██╗██║░░██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║  ░╚═══██╗██║░░██║██║░░░██║██║░░██║\r\n██████╔╝╚█████╔╝██║░░██║███████╗███████╗██║░╚███║  ██████╔╝╚█████╔╝╚██████╔╝██████╔╝\r\n╚═════╝░░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝  ╚═════╝░░╚════╝░░╚═════╝░╚═════╝░");
     Console.WriteLine(boaVindas);
 }
 
 void ExibirMenu()
 {
+    ExibirLogo();
     Console.WriteLine("\nDigite 1 para registrar uma banda");
     Console.WriteLine("Digite 2 para mostrar todas as bandas");
     Console.WriteLine("Digite 3 para avaliar uma banda");
@@ -23,7 +25,7 @@ void ExibirMenu()
     {
         case 1: RegistrarBanda();
             break; 
-        case 2: Console.WriteLine("Opção escolhida : " + opcaoNumerica);
+        case 2: ListarBandas();
             break;
         case 3: Console.WriteLine("Opção escolhida : " + opcaoNumerica);
             break;
@@ -40,15 +42,37 @@ void ExibirMenu()
 void RegistrarBanda() 
 {
     Console.Clear();// limpar o console 
-    Console.WriteLine("Registro de bandas");
+    Console.WriteLine("********************************");
+    Console.WriteLine(" Registro de bandas ");
+    Console.WriteLine("********************************\n");
     Console.Write("Digite o nome da banda : ");//nao pila linha 
     string nomeDaBanda = Console.ReadLine()!;// ! indica q nao quer valor nulo
-    Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso"); // interpolacao de string 
+    ListaDasBandas.Add(nomeDaBanda);
+    Console.WriteLine($"\nA banda {nomeDaBanda} foi registrada com sucesso"); // interpolacao de string 
+    Thread.Sleep(2000);// esperar 2000 milisegundos
+    Console.Clear();
+    ExibirMenu();
+}
 
+void ListarBandas()
+{
+    Console.Clear();
+    Console.WriteLine("********************************");
+    Console.WriteLine(" Listando bandas registradas ");
+    Console.WriteLine("********************************\n");
+
+    for (int i = 0; i < ListaDasBandas.Count; i++) 
+    {
+        Console.WriteLine($"Banda : {ListaDasBandas[i]}");
+    }
+
+    Console.WriteLine("\ndigite qualquer tecla para ir pro Menu");
+    Console.ReadKey();// reconhece qq tecla para seguir
+    Console.Clear();
+    ExibirMenu();
 
 
 
 }
 
-ExibirMensagemBoasVindas();
 ExibirMenu();
