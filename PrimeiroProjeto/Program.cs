@@ -39,7 +39,7 @@ void ExibirMenu()
             AvaliarBanda();
             break;
         case 4:
-            Console.WriteLine("Opção escolhida : " + opcaoNumerica);
+            MediaBanda();
             break;
         case 0:
             Console.WriteLine("Opção escolhida : " + opcaoNumerica);
@@ -89,12 +89,11 @@ void ListarBandas()
 
     foreach (string banda in bandasRegistradas.Keys)//pega somento o nome da banda
     {
-        Console.WriteLine($"Banda : {banda}");
+        Console.WriteLine($"Banda : {banda}.");
     }
     //utilizado com a lista 
 
-
-    Console.WriteLine("\ndigite qualquer tecla para ir pro Menu");
+    Console.WriteLine("\nDigite qualquer tecla para ir pro Menu");
     Console.ReadKey();// reconhece qq tecla para seguir
     Console.Clear();
     ExibirMenu();
@@ -118,9 +117,10 @@ void AvaliarBanda()
         Console.Write($"\nQual a nota que a banda merece {nomeDaBanda} merece: ");
         int nota = int.Parse(Console.ReadLine()!);// temos q transformar pq as informacoes adquiridas do console
                                                   // sao no formato de string e queremos um int.
+        
         bandasRegistradas[nomeDaBanda].Add(nota); // [] quando faco isso eu acesso os valores
         Console.WriteLine($"\nA nota {nota} foi registrada com sucesso");
-        Thread.Sleep(5000);
+        Thread.Sleep(3000);
         Console.Clear();
         ExibirMenu();
     }
@@ -135,6 +135,37 @@ void AvaliarBanda()
     }
 
  
+}
+
+void MediaBanda()
+{
+    Console.Clear();
+    ExibirTituloDaOpcao("Media das notas");
+    Console.WriteLine("Lista de banda");
+    foreach(string banda in bandasRegistradas.Keys)//pega somento o nome da banda
+    {
+        Console.WriteLine($"Banda : {banda}");
+    }
+    Console.WriteLine("Digite o nome da banda : ");
+    string bandaAvaliada = Console.ReadLine()!;
+    if (bandasRegistradas.ContainsKey(bandaAvaliada))
+    {
+        List<int> valores = bandasRegistradas[bandaAvaliada];
+        double media = valores.Average();
+
+        Console.WriteLine($"\nA média da avaliação da banda {bandaAvaliada} é: {media}");
+    }
+    else
+    {
+        Console.WriteLine($"\nA banda {bandaAvaliada} não existe na lista.");
+    }
+
+    Console.WriteLine("\ndigite qualquer tecla para ir pro Menu");
+    Console.ReadKey();// reconhece qq tecla para seguir
+    Thread.Sleep(4000);
+    Console.Clear();
+    ExibirMenu();
+
 }
 void ExibirTituloDaOpcao(string titulo)
 {
